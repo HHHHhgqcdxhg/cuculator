@@ -1,0 +1,29 @@
+[
+    {
+        "formula_id": 0,
+        "formula_describe": "碧蓝航线炮击伤害",
+        "formula_introduce": "碧蓝航线炮击伤害计算器...cuculator试做用",
+        "formula_class": 0,
+        "formula_classname": "碧蓝航线",
+        "formula_time": 1547348683,
+        "formula_uploador": 0
+    },
+    {
+        "formula_id": 1,
+        "formula_describe": "碧蓝航线雷击伤害",
+        "formula_introduce": "碧蓝航线雷击伤害计算器...cuculator试做用",
+        "formula_class": 0,
+        "formula_classname": "碧蓝航线",
+        "formula_time": 1547348683,
+        "formula_uploador": 0
+    },
+    {
+        "formula_id": 2,
+        "formula_describe": "碧蓝航线航弹伤害",
+        "formula_introduce": "碧蓝航线雷击伤害计算器...cuculator试做用",
+        "formula_class": 0,
+        "formula_classname": "碧蓝航线",
+        "formula_time": 1547348683,
+        "formula_uploador": 0
+    }
+]
