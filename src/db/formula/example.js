@@ -1,13 +1,17 @@
+// 网站会根据这样的json生成计算页面,
+// 可能我写注释的某条跟类型相同的某条有冲突,以写注释的那条为准
+
 let x = {
     "option": {
         // 本条计算的id,为递增数字
         "id": 1,
 
         // 本条计算的name,要符合js命名规范
+        // 关于js命名规范,没有编程基础的同学可以理解为,只能使用数字字母下划线,且以字母或下划线开头
         "name": "azurlanepaojidamage",
 
         // 本条计算的名称
-        "description": "碧蓝航线炮击伤害",
+        "description": "碧蓝航线踩踩踩伤害",
 
         // 本条计算的介绍
         "introduce": "碧蓝航线炮击伤害计算器...cuculator试做用",
@@ -17,6 +21,9 @@ let x = {
 
         // 上传者
         "uploader": "HHHHhg",
+
+        // 本公式最后一次编辑的时间
+        "time":1547348683
 
     },
     "inputs": [
@@ -47,7 +54,7 @@ let x = {
             // 暂时不用管这个
             "minor": false,
 
-            // 显示的格式,用一对大括号代表变量,如设为"{}%",则会在输入框后面加上一个%
+            // 显示的格式,用一对大括号前面加"$"代表变量,如设为"${}%",则会在输入框后面加上一个%
             "format": null,
 
             // 不填入数据时的缺省值
@@ -62,12 +69,15 @@ let x = {
             // 暂时不管这个
             "area": 0,
 
-            // 这个值在写这份json的时候没用,但是最好声明一下,写上null即可
+            // 这个值在写这份json的时候没用,但是要声明一下,写上null即可
             "value": 4959
         },
         {
             "name": "baojishanghai",
+
+            // static为静态数据,暴击伤害倍率为静态的1.5
             "type": "static",
+
             "description": "暴击伤害",
             "introduce": "暴击伤害",
             "placeholder": "暴击伤害",
@@ -75,10 +85,12 @@ let x = {
             "min": null,
             "minor": false,
             "format": null,
-            "default": 1.5,
+            "default": null,
             "example": 1.5,
             "choice": null,
             "area": 0,
+
+            // static必须设置value
             "value": 1.5
         },
         {
@@ -101,19 +113,20 @@ let x = {
         {
             "name": "shuxingjiacheng",
 
-            // reduce表示多输入框
+            // reduce表示一组多输入框
             "type": "reduce",
             "accuracy": null,
             "description": "属性加成",
             "introduce": "攻击方的属性加成",
             "placeholder": "输入属性加成",
-            "max": null,
-            "min": null,
+            // 本组输入整合计算后得到的值的最大最小值
+            "max": 100,
+            "min": 0,
             "minor": false,
             "format": "${}%",
 
             // reduce的默认值为数组
-            "default": [0],
+            "default": 0,
             "example": null,
             "choice": null,
             "reduce": {
@@ -132,17 +145,19 @@ let x = {
                 "default": 15,
 
                 // 暂时没用
-                "example": 15,
+                "example": [15],
 
-                // 这个value暂时没用
-                "value": 15,
+                // 这个value为数组
+                "value": [15],
 
                 // reduce的每个选择项也可为choice
                 "choice": null
             },
-            "value": [
-                0
-            ],
+
+            // 这里的value为本组计算结果,是number而非数组
+            "value": 15,
+
+            // 这条暂时没用
             "area": 0
         },
         {
@@ -244,10 +259,7 @@ let x = {
                 "max": null,
                 "min": null,
                 "format": "${}%",
-                "default": [
-                    15,
-                    20
-                ],
+                "default": 15,
                 "_default": null,
                 "example": [
                     15,
@@ -259,9 +271,7 @@ let x = {
                 ]
             },
             "area": 0,
-            "value": [
-                0
-            ]
+            "value": 0
         },
         {
             "name": "direndebuff",
@@ -284,10 +294,7 @@ let x = {
                 "max": null,
                 "min": null,
                 "format": "${}%",
-                "default": [
-                    15,
-                    20
-                ],
+                "default": 15,
                 "example": [
                     15,
                     20
@@ -299,9 +306,7 @@ let x = {
                 "_default": null
             },
             "area": 0,
-            "value": [
-                0
-            ]
+            "value": 0
         },
         {
             "name": "lieshabuff",
@@ -338,33 +343,107 @@ let x = {
             "value": 0.5
         }
     ],
-    "middle":[],
+    "switches":[
+        {
+            "name":"kezhi",
+            "type":"buttons",
+            "description": "属性克制",
+            "introduce": "属性克制",
+            "default": 1,
+            "example": 1,
+            "format": null,
+            "data":[
+                {
+                    "text":"克制",
+                    "value":2,
+                },
+                {
+                    "text":"不克制",
+                    "value":1
+                },
+                {
+                    "text":"被克制",
+                    "value":0.5
+                }
+            ],
+            "value":1,
+        },
+        {
+            "name":"tuzi",
+            "type":"switch",
+            "description": "秃子",
+            "introduce": "秃子",
+            "default": 1,
+            "example": 1,
+            "format": null,
+            "data":[
+                {
+                    "text":"是",
+                    "value":2,
+                },
+                {
+                    "text":"否",
+                    "value":1
+                }
+            ],
+            "value":1,
+        }
+    ],
     "outputs": [
         {
             // 该条输出的变量名,要符合js命名规范
             "name": "damage",
+
+            // 该条输出的精确度,精确到小数点后几位
             "accuracy": 2,
+
+            // 精确近位时的规则,可选:
+            // "round" : 表示四舍五入
+            // "ceil" : 向上取整
+            // "floor" : 向下取整
             "fix": "round",
+
+            // 若将show设为false,则不会在页面上显示本条输出,但是可以作为中间变量,供后面的其他output作为参数使用
+            "show":true,
+
+            // 这两天同input
             "description": "伤害",
             "introduce": "伤害",
+
+            // 大于max会得到max,小于min会得到min
             "max": null,
             "min": null,
-            "minor": false,
+
+            // 本条计算的公式,可以用本条output上面所有input,output和switch的name作为参数,下面的一条output就使用了本条output作为参数
+            // 出于安全考虑,formula只准写一行,不允许出现分号(';')
+            // 下面说的有编程基础的话比较容易理解,没有编程基础也可以看下,尽量写得浅显易懂.不懂的话也问题不大,不妨碍写基本的算式
+            // 实际上formula是传递给eval函数执行并返回结果,因此可以在本行里面使用一些js固有的对象,例如Number和Math对象,比如可以用Math.PI表示圆周率,亦可执行函数,例如用Math.random()生成随机数
+            // 但是,出于安全考虑,本条表达式只准写一行,不允许出现分号(';'),且必须返回一个number类型的返回值
             "formula": "(1.1 - rand*0.2) * paoji * xiaolv/100 * (1 + shuxingjiacheng/100) * zhuangjiabuzheng/100 * (1 + dengjiyazhi) * (1+danyaobuff/100+zengshangjineng/100)*(1 + direndebuff/100)*(1 + lieshabuff/100)",
+
+            // 暂时没用
             "area": 0,
+
+            // 设为true,则显示结果时,将把结果用逗号(",")分割以增加可读性
             "split": false,
+
+            // 初始值
             "value": 0
         },
         {
             "name": "damage2",
             "accuracy": 2,
             "fix": "round",
+            "show":true,
             "description": "伤害(暴击)",
             "introduce": "伤害",
             "max": null,
             "min": null,
             "minor": false,
+
+            // 可以使用上面出现过的output作为参数
             "formula": "baojishanghai * damage",
+
             "area": 0,
             "split": false,
             "value": 0
@@ -372,3 +451,4 @@ let x = {
     ]
 }
 console.log(x)
+console.log(JSON.stringify(x))

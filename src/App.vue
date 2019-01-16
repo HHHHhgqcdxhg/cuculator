@@ -32,14 +32,20 @@
         name: 'App',
         data () {
             return {
-                formulas: {}
+                formulas: {},
             };
+        },
+        methods:{
+
         },
         created () {
             axios.get('https://cuculator.top/index.json').then(res => {
                 let formulas = res.data;
+                window.localStorage.formulas_raw = JSON.stringify(formulas)
+                window.global_formulas = {}
                 for (let formula of formulas) {
-                    console.log(formula);
+                    window.global_formulas[formula.formula_id.toString()] = formula
+                    // console.log(formula);
                     if (Object.keys(this.formulas).indexOf(formula.formula_class.toString()) == -1) {
                         this.$set(this.formulas, formula.formula_class.toString(), {
                             id: formula.formula_class,
@@ -54,8 +60,10 @@
                     }
                     this.formulas[formula.formula_class.toString()].formulas.push(formula);
                 }
-
+                window.localStorage.formulas = JSON.stringify(this.formulas)
                 console.log(this.formulas);
+            }).catch(error=>{
+                this.formulas = window.localStorage.formulas
             });
         }
     };

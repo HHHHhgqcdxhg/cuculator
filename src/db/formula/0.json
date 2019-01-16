@@ -6,6 +6,7 @@
         "index": "azurlane/",
         "lazy": false,
         "uploader": "HHHHhg",
+        "time":1547348683,
         "introduce": "碧蓝航线炮击伤害计算器...cuculator试做用"
     },
     "inputs": [
@@ -83,15 +84,8 @@
                 "step": null,
                 "placeholder": "输入属性加成",
                 "format": "${}%",
-                "default": [
-                    15,
-                    20
-                ],
-                "_default": 10,
-                "example": [
-                    15,
-                    20
-                ],
+                "default": 15,
+                "example":15,
                 "value": [
                     0
                 ],
@@ -299,7 +293,7 @@
             "minor": false,
             "formula": "(1.1 - rand*0.2) * paoji * xiaolv/100 * (1 + shuxingjiacheng/100) * zhuangjiabuzheng/100 * (1 + dengjiyazhi) * (1+danyaobuff/100+zengshangjineng/100)*(1 + direndebuff/100)*(1 + lieshabuff/100)",
             "area": 0,
-            "split": false,
+            "split": true,
             "value": 0
         },
         {
