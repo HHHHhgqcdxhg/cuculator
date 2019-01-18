@@ -79,4 +79,11 @@
     a{
         text-decoration:none !important;
     }
+    .el-collapse-item__content{
+        padding-bottom: 0;
+    }
+    .el-radio.is-bordered{
+        width:140px;
+    }
+
 </style>

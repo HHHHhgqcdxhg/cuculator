@@ -70,7 +70,6 @@ export default {
                     description: d.description,
                     placeholder: d.placeholder,
                 };
-                console.log(o);
                 this.disData.push(o);
             }
         },

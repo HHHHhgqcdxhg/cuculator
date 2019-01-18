@@ -6,13 +6,18 @@
         <el-main style="padding:0;">
             <el-container>
                 <el-main style="padding:15px;">
-                    <el-form label-position="left" label-width="80px"> <cuInput v-for="(o, k) in data.inputs" :key="k" :lazy="data.option.lazy" v-model="data.inputs[k]"></cuInput> </el-form>
+                    <!--{{data}}-->
+                    <el-form label-position="left" label-width="80px">
+                        <cuInput v-for="(o, k) in data.inputs" :key="k" :lazy="data.option.lazy" v-model="data.inputs[k]"></cuInput>
+                    </el-form>
                 </el-main>
-                <el-aside width="20vw" style="max-width:262px;box-shadow: -6px 0 6px -5px #409eff;padding-left: 10px;min-width: 240px">
+                <el-aside width="20vw" style="max-width:266px;box-shadow: -6px 0 6px -5px #409eff;padding-left: 10px;min-width: 240px">
                     <el-form label-position="left" label-width="80px">
                         <el-collapse value="outputs">
                             <el-collapse-item title="状态" name="switches">
-                                <cu-switch></cu-switch>
+                                <cuInput v-for="(o,i) in data.switches" :key="i" v-model="data.switches[i]"></cuInput>
+                                <!--<cu-switch v-for="o,i in data.switches" :key="i" :lazy="data.option.lazy" v-model="data.switches[i]"></cu-switch>-->
+                                <template v-if="!data.switches">无</template>
                             </el-collapse-item>
                             <el-collapse-item title="输出" name="outputs">
                                 <el-form-item> <el-button v-show="data.option.lazy" round type="primary" @click="calculate">计算 </el-button> </el-form-item>
@@ -51,7 +56,9 @@ export default {
                 if (newData.option.lazy) {
                     return;
                 }
-                window.localStorage.setItem(newData.option.name, JSON.stringify(newData));
+                console.log(`formula_${newData.option.id.toString()}`)
+                console.log(newData)
+                window.localStorage.setItem(`formula_${newData.option.id.toString()}`, JSON.stringify(newData))
                 try {
                     this.calculate();
                 } catch (e) {}
@@ -62,6 +69,9 @@ export default {
     methods: {
         calculate: function() {
             for (let o of this.data.inputs) {
+                eval(`window.${o.name} = ${o.value}`);
+            }
+            for (let o of this.data.switches) {
                 eval(`window.${o.name} = ${o.value}`);
             }
             for (let o of this.data.outputs) {

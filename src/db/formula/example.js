@@ -4,7 +4,7 @@
 let x = {
     "option": {
         // 本条计算的id,为递增数字
-        "id": 1,
+        "id": 3,
 
         // 本条计算的name,要符合js命名规范
         // 关于js命名规范,没有编程基础的同学可以理解为,只能使用数字字母下划线,且以字母或下划线开头
@@ -22,7 +22,7 @@ let x = {
         // 上传者
         "uploader": "HHHHhg",
 
-        // 本公式最后一次编辑的时间
+        // 本公式最后一次编辑的时间,在浏览器中按f12打开开发者工具,点到上面的console,标签,在console下面空白处点一下,输入new Date().getTime()回车,就能得到当前时间,
         "time":1547348683
 
     },
@@ -31,11 +31,12 @@ let x = {
             // 该条输入的变量名,要符合js命名规范
             "name": "paoji",
 
-            // 该条输入的类型,可以为"input","choice","reduce","static"中的一个
+            // 该条输入的类型,可以为"input","choice","reduce","static","buttons"和"switch"中的一个
             // input代表输入框
             // choice代表选择,详见弹药buff那条
             // reduce代表多栏输入框,详见属性加成那条
             // static为静态数据,本条的暴击伤害为静态的1.5
+            // "buttons"和"switch"见下面switches
             "type": "input",
 
             // 本条输入的名称
@@ -343,9 +344,16 @@ let x = {
             "value": 0.5
         }
     ],
+
+    // "switches"表示切换状态,里面的内容将会在页面右侧,结果栏的上面显示,方便切换状态显示结果
     "switches":[
         {
             "name":"kezhi",
+            // type可选buttons或switch
+            // buttons和switch类似上面的choice,都是创建好选项给用户选择,但是choice可以允许用户新建选择项,buttons和switch则不可以
+            // buttons代表按钮组,限制一组内最多有4条选项,再多请选择在inputs里面用choice
+            // switch代表开关,必须有2条选项
+            // buttons和switch也可作为inputs的type,在inputs里面的时候,将渲染在页面中间的inputs栏而非右侧的switches栏
             "type":"buttons",
             "description": "属性克制",
             "introduce": "属性克制",
@@ -358,11 +366,11 @@ let x = {
                     "value":2,
                 },
                 {
-                    "text":"不克制",
+                    "text":"不被克制",
                     "value":1
                 },
                 {
-                    "text":"被克制",
+                    "text":"被被被克克克克克制",
                     "value":0.5
                 }
             ],
@@ -442,7 +450,7 @@ let x = {
             "minor": false,
 
             // 可以使用上面出现过的output作为参数
-            "formula": "baojishanghai * damage",
+            "formula": "baojishanghai * damage * tuzi * kezhi",
 
             "area": 0,
             "split": false,
