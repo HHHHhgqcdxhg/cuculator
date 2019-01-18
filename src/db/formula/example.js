@@ -23,7 +23,12 @@ let x = {
         "uploader": "HHHHhg",
 
         // 本公式最后一次编辑的时间,在浏览器中按f12打开开发者工具,点到上面的console,标签,在console下面空白处点一下,输入new Date().getTime()回车,就能得到当前时间,
-        "time":1547348683
+        "time":1547348683,
+
+        // 全局控制是否用逗号分隔结果以增加可读性.
+        // 如果将本条设置为null,则结果是否需要分隔取决于具体每条output里的split的值
+        // 设为true或false,则结果是否分割取决于本条的值
+        "split":null
 
     },
     "inputs": [
@@ -453,7 +458,7 @@ let x = {
             "formula": "baojishanghai * damage * tuzi * kezhi",
 
             "area": 0,
-            "split": false,
+            "split": true,
             "value": 0
         }
     ]

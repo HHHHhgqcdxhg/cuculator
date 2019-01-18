@@ -7,17 +7,17 @@
             <el-container>
                 <el-main style="padding:15px;">
                     <!--{{data}}-->
-                    <el-form label-position="left" label-width="80px">
-                        <cuInput v-for="(o, k) in data.inputs" :key="k" :lazy="data.option.lazy" v-model="data.inputs[k]"></cuInput>
-                    </el-form>
+                    <el-form label-position="left" label-width="80px"> <cuInput v-for="(o, k) in data.inputs" :key="k" :lazy="data.option.lazy" v-model="data.inputs[k]"></cuInput> </el-form>
                 </el-main>
                 <el-aside width="20vw" style="max-width:266px;box-shadow: -6px 0 6px -5px #409eff;padding-left: 10px;min-width: 240px">
-                    <el-form label-position="left" label-width="80px">
+                    <el-form label-position="left" label-width="86px">
                         <el-collapse value="outputs">
                             <el-collapse-item title="状态" name="switches">
-                                <cuInput v-for="(o,i) in data.switches" :key="i" v-model="data.switches[i]"></cuInput>
+                                <cuInput v-for="(o, i) in data.switches" :key="i" v-model="data.switches[i]"></cuInput>
                                 <!--<cu-switch v-for="o,i in data.switches" :key="i" :lazy="data.option.lazy" v-model="data.switches[i]"></cu-switch>-->
-                                <template v-if="!data.switches">无</template>
+                                <template v-if="!data.switches"
+                                    >无
+                                </template>
                             </el-collapse-item>
                             <el-collapse-item title="输出" name="outputs">
                                 <el-form-item> <el-button v-show="data.option.lazy" round type="primary" @click="calculate">计算 </el-button> </el-form-item>
@@ -26,9 +26,21 @@
                                 </el-tooltip>
                             </el-collapse-item>
                             <el-collapse-item title="选项">
-                                <el-form-item label="触发计算:">
-                                    <el-switch v-model="data.option.lazy" inactive-color="#13ce66" active-text="按钮触发" inactive-text="输入触发"></el-switch>
-                                </el-form-item>
+                                <el-tooltip class="item" effect="light" content="触发计算的方式,输入触发or按钮触发" placement="top-start">
+                                    <el-form-item label="触发计算:">
+                                        <el-switch v-model="data.option.lazy" inactive-color="#13ce66" active-text="按钮" inactive-text="输入"></el-switch>
+                                    </el-form-item>
+                                </el-tooltip>
+                                <el-tooltip class="item" effect="light" content="使用逗号分割结果以增加可读性" placement="top-start">
+                                    <el-form-item label="格式化结果:">
+                                        <!--<el-switch v-model="data.option.split" :active-value="true" :inactive-value="false"></el-switch>-->
+                                        <el-radio-group v-model="data.option.split" size="mini" @change="calculate()">
+                                                <el-radio-button :label="false">否</el-radio-button>
+                                                <el-radio-button :label="null">默认</el-radio-button>
+                                                <el-radio-button :label="true">是</el-radio-button>
+                                        </el-radio-group>
+                                    </el-form-item>
+                                </el-tooltip>
                             </el-collapse-item>
                         </el-collapse>
                     </el-form>
@@ -40,7 +52,7 @@
 
 <script>
 import cuInput from './cu-input.vue';
-import cuSwitch from './cu-switch.vue'
+import cuSwitch from './cu-switch.vue';
 
 export default {
     name: 'cuculator',
@@ -53,12 +65,18 @@ export default {
         this.$watch(
             'data',
             (newData, oldData) => {
+                // console.log(newData.option.split)
+                // console.log(oldData.option.split)
+                // if(newData.option.split!==oldData.option.split){
+                //     console.log(newData.option.split)
+                //     this.calculate();
+                // }
                 if (newData.option.lazy) {
                     return;
                 }
-                console.log(`formula_${newData.option.id.toString()}`)
-                console.log(newData)
-                window.localStorage.setItem(`formula_${newData.option.id.toString()}`, JSON.stringify(newData))
+                // console.log(`formula_${newData.option.id.toString()}`)
+                // console.log(newData)
+                window.localStorage.setItem(`formula_${newData.option.id.toString()}`, JSON.stringify(newData));
                 try {
                     this.calculate();
                 } catch (e) {}
@@ -90,7 +108,7 @@ export default {
                 result = result / accuracy;
                 o.max != null && result > o.max && (result = o.max);
                 o.min != null && result < o.min && (result = o.min);
-                o.split && (result = this.split(result));
+                result = this.vSplit(o,result)
                 o.value = result;
             }
         },
@@ -105,11 +123,21 @@ export default {
                 res = a[i] + res;
                 (l - i) % 3 === 0 && i > 0 && (res = ',' + res);
             }
-            (as.length > 1) && (res += '.' + as[1]);
+            as.length > 1 && (res += '.' + as[1]);
             return res;
         },
+        vSplit:function (o,result) {
+            if (this.data.option.split === null) {
+                o.split && (result = this.split(result));
+            } else {
+                if (this.data.option.split === true){
+                    result = this.split(result)
+                }
+            }
+            return result
+        }
     },
-    components: {cuInput,cuSwitch},
+    components: {cuInput, cuSwitch},
 };
 </script>
 

@@ -61,7 +61,7 @@
                     this.formulas[formula.formula_class.toString()].formulas.push(formula);
                 }
                 window.localStorage.formulas = JSON.stringify(this.formulas)
-                console.log(this.formulas);
+                // console.log(this.formulas);
             }).catch(error=>{
                 this.formulas = window.localStorage.formulas
             });
@@ -80,7 +80,7 @@
         text-decoration:none !important;
     }
     .el-collapse-item__content{
-        padding-bottom: 0;
+        padding-bottom: 0 !important;
     }
     .el-radio.is-bordered{
         width:140px;
