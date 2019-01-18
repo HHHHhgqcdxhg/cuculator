@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <link rel="manifest" href="https://cuculator.top/manifest.json">
-    <title>cuculator</title>
-      <script>
-          if ('serviceWorker' in navigator) {
-              window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/service-worker.js').then(registration => {
-                      console.log('SW registered: ', registration);
-                  }).catch(registrationError => {
-                      console.log('SW registration failed: ', registrationError);
-                  });
-              });
-          }
-      </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="manifest" href="https://cuculator.top/manifest.json" />
+        <title>cuculator</title>
+        <script>
+            if ('serviceWorker' in navigator) {
+                let version = "0.1.3"
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker
+                        .register('/service-worker.js')
+                        .then(registration => {
+                            if (localStorage.getItem('sw_version') !== version) {
+                                try {
+                                    registration.update().then(function() {
+                                        localStorage.setItem('sw_version', version);
+                                    });
+                                } catch (e) {}
+                                console.log(`SW registered: v`,version);
+                            }
+                        })
+                        .catch(registrationError => {
+                            console.log('SW registration failed: ', registrationError);
+                        });
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+    </body>
 </html>

@@ -25,6 +25,12 @@
         },
         created () {
             this.getData()
+            // this.$notify({
+            //     title: '本公式已更新',
+            //     message: `version :${123} -> ${234}`,
+            //     type: 'success',
+            //     duration:0
+            // });
             // axios.get(`https://cuculator.top/formula/${this.$route.params.fid}.json`).then((res)=>{
             //     this.data = res.data
             // })
@@ -37,8 +43,10 @@
         },
         methods: {
             getData: function () {
+                let hasLocal = false
                 let d_local = window.localStorage.getItem(`formula_${this.$route.params.fid}`)
                 if (d_local) {
+                    hasLocal = true
                     d_local = JSON.parse(d_local)
                     this.data = d_local
                     if (window.global_formulas) {
@@ -47,13 +55,33 @@
                         }
                     }
                 }
-                this.getDataPromot()
+                this.getDataPromot(hasLocal)
                 return null
             },
-            getDataPromot: function () {
+            getDataPromot: function (hasLocal) {
                 axios.get(`https://cuculator.top/formula/${this.$route.params.fid}.json`).then((res) => {
-                    this.data = res.data
-                    window.localStorage.setItem(`formula_${this.$route.params.fid}`, JSON.stringify(res.data))
+                    if(hasLocal){
+                        let oldTime = this.data.option.time
+                        let newTime = res.data.option.time
+                        if(newTime !== oldTime){
+                            this.data = res.data
+                            window.localStorage.setItem(`formula_${this.$route.params.fid}`, JSON.stringify(res.data))
+                            if(hasLocal){
+                                this.$notify({
+                                    title: '本公式已更新',
+                                    message: `version :${oldTime} -> ${newTime}`,
+                                    type: 'success'
+                                });
+                            }
+                        }
+                    }else{
+                        this.data = res.data
+                        window.localStorage.setItem(`formula_${this.$route.params.fid}`, JSON.stringify(res.data))
+                    }
+
+
+
+
                 })
             }
         },
