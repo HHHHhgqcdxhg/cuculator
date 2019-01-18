@@ -31,7 +31,7 @@
                                         <el-switch v-model="data.option.lazy" inactive-color="#13ce66" active-text="按钮" inactive-text="输入"></el-switch>
                                     </el-form-item>
                                 </el-tooltip>
-                                <el-tooltip class="item" effect="light" content="使用逗号分割结果以增加可读性" placement="top-start">
+                                <el-tooltip class="item" effect="light" content="使用逗号分割结果以增加可读性" placement="bottom-start">
                                     <el-form-item label="格式化结果:">
                                         <!--<el-switch v-model="data.option.split" :active-value="true" :inactive-value="false"></el-switch>-->
                                         <el-radio-group v-model="data.option.split" size="mini" @change="calculate()">
@@ -83,14 +83,22 @@ export default {
             },
             {deep: true},
         );
+        this.calculate()
+
+    },
+    mouted(){
+        // this.calculate()
     },
     methods: {
         calculate: function() {
+            if(this.data.inputs){
             for (let o of this.data.inputs) {
                 eval(`window.${o.name} = ${o.value}`);
-            }
-            for (let o of this.data.switches) {
-                eval(`window.${o.name} = ${o.value}`);
+            }}
+            if(this.data.switches) {
+                for (let o of this.data.switches) {
+                    eval(`window.${o.name} = ${o.value}`);
+                }
             }
             for (let o of this.data.outputs) {
                 let accuracy = Math.pow(10, o.accuracy);

@@ -139,7 +139,7 @@ let x = {
                 // formula为这些输入框之间的规则,可以理解为reduce( (a,b)=>{ 这里执行并返回你填入的formula } , [ 数组 ] )   这里的数组是用户在该条输入的多条数据组成的数组,不懂reduce函数的可以看下http://www.runoob.com/jsref/jsref-reduce.html
                 "formula": "a + b",
 
-                // 同输入的type,可以为"input","choice","reduce","static"中的一个( reduce可以嵌套reduce )
+                // 同输入的type,可以为"input","choice","reduce","static","buttons"和"switch"中的一个( reduce可以嵌套reduce )
                 // 下面几条都与输入的对应一致,作用于改组内每条输入
                 "type": "input",
                 "max": null,
