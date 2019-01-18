@@ -73,7 +73,22 @@
             "default": 0,
             "example": null,
             "choice": null,
-            "reduce": {"formula": "a + b", "type": "input", "max": null, "min": null, "placeholder": "输入属性加成", "format": "${}%", "default": 15, "example": [15], "value": [15], "choice": null},
+            "reduce": {
+                "formula": "a + b",
+                "type": "input",
+                "max": null,
+                "min": null,
+                "placeholder": "输入属性加成",
+                "format": "${}%",
+                "default": 15,
+                "example": [
+                    15
+                ],
+                "value": [
+                    15
+                ],
+                "choice": null
+            },
             "value": 15,
             "area": 0
         },
@@ -124,7 +139,25 @@
             "format": "{}",
             "default": 0,
             "example": 0,
-            "choice": {"config": {"allowCreate": true}, "data": [{"text": "弹药充足(30%增伤)", "value": 30}, {"text": "弹药一般", "value": 0}, {"text": "弹药缺少(20%减伤)", "value": -20}]},
+            "choice": {
+                "config": {
+                    "allowCreate": true
+                },
+                "data": [
+                    {
+                        "text": "弹药充足(30%增伤)",
+                        "value": 30
+                    },
+                    {
+                        "text": "弹药一般",
+                        "value": 0
+                    },
+                    {
+                        "text": "弹药缺少(20%减伤)",
+                        "value": -20
+                    }
+                ]
+            },
             "area": 0,
             "value": 0
         },
@@ -151,9 +184,14 @@
                 "format": "${}%",
                 "default": 15,
                 "_default": null,
-                "example": [15, 20],
+                "example": [
+                    15,
+                    20
+                ],
                 "choice": null,
-                "value": [0]
+                "value": [
+                    0
+                ]
             },
             "area": 0,
             "value": 0
@@ -180,8 +218,13 @@
                 "min": null,
                 "format": "${}%",
                 "default": 15,
-                "example": [15, 20],
-                "value": [0],
+                "example": [
+                    15,
+                    20
+                ],
+                "value": [
+                    0
+                ],
                 "choice": null,
                 "_default": null
             },
@@ -232,7 +275,20 @@
             "default": 1,
             "example": 1,
             "format": null,
-            "data": [{"text": "克制", "value": 2}, {"text": "不被克制", "value": 1}, {"text": "被被被克克克克克制", "value": 0.5}],
+            "data": [
+                {
+                    "text": "克制",
+                    "value": 2
+                },
+                {
+                    "text": "不被克制",
+                    "value": 1
+                },
+                {
+                    "text": "被被被克克克克克制",
+                    "value": 0.5
+                }
+            ],
             "value": 1
         },
         {
@@ -243,7 +299,16 @@
             "default": 1,
             "example": 1,
             "format": null,
-            "data": [{"text": "是", "value": 2}, {"text": "否", "value": 1}],
+            "data": [
+                {
+                    "text": "是",
+                    "value": 2
+                },
+                {
+                    "text": "否",
+                    "value": 1
+                }
+            ],
             "value": 1
         }
     ],
