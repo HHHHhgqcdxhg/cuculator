@@ -29,6 +29,10 @@ export default {
             (newData, oldData) => {
                 for (let o of newData) {
                     this.data.reduce.value[o.index] = o.value;
+                    if(typeof (o.value) == "string"){
+                        // console.log(o.value)
+                        // console.log(o)
+                    }
                 }
                 this.data.value = this.data.reduce.value.reduce((a, b) => {
                     return eval(this.data.reduce.formula);
@@ -67,6 +71,7 @@ export default {
                     format: d.format,
                     value: v,
                     name: '',
+                    default:d.default,
                     description: d.description,
                     placeholder: d.placeholder,
                 };

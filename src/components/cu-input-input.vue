@@ -21,10 +21,40 @@
             };
         },
         watch: {
+            // 'data.value': function (newData, oldData) {
+            //     if(this.lazy){return}
+            //     console.log(newData)
+            //     let newNum = parseFloat(newData)
+            //     if (newNum.toString() === 'NaN' && newData !== "") {
+            //         let oldNum = parseFloat(oldData)
+            //         if (oldNum.toString() !== 'NaN') {
+            //             this.data.value = oldData;
+            //         }
+            //         else if (this.data.default !== null) {
+            //             this.data.value = this.data.default;
+            //         }
+            //         this.alertTitle = '请输入数字';
+            //     }else if(newData === ''){
+            //         if(this.data.default===null){
+            //             this.data.value = this.data.default
+            //         }else{
+            //             this.data.value = 0
+            //         }
+            //     }
+            //     else if (this.data.max !== null && newNum >= this.data.max) {
+            //         this.data.value = this.data.max
+            //         this.alertTitle = `超出最大值${this.data.max}`
+            //     } else if (this.data.min !== null && newNum <= this.data.min) {
+            //         this.data.value = this.data.min
+            //         this.alertTitle = `低于最小值${this.data.min}`
+            //     } else {
+            //         this.alertTitle = null;
+            //     }
+            // },
             'data.value': function (newData, oldData) {
                 if(this.lazy){return}
                 let newNum = parseFloat(newData)
-                if (newNum.toString() === 'NaN' && newData !== "") {
+                if (newNum.toString() === 'NaN') {
                     let oldNum = parseFloat(oldData)
                     if (oldNum.toString() !== 'NaN') {
                         this.data.value = oldData;
@@ -33,9 +63,12 @@
                         this.data.value = this.data.default;
                     }
                     this.alertTitle = '请输入数字';
-                } else if (this.data.max && newNum > this.data.max) {
+                }
+                else if (this.data.max !== null && newNum >= this.data.max) {
+                    this.data.value = this.data.max
                     this.alertTitle = `超出最大值${this.data.max}`
-                } else if (this.data.min && newNum < this.data.min) {
+                } else if (this.data.min !== null && newNum <= this.data.min) {
+                    this.data.value = this.data.min
                     this.alertTitle = `低于最小值${this.data.min}`
                 } else {
                     this.alertTitle = null;

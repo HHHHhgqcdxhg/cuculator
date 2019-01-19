@@ -5,8 +5,8 @@ import Vue from 'vue'
 
 // import {Notification} from 'element-ui'
 
-const elels = `Menu,Submenu,MenuItem,MenuItemGroup,Input,InputNumber,Radio,RadioGroup,RadioButton,Switch,Button,ButtonGroup,Tooltip,Form,FormItem,Row,Col,Container,Aside,Header,Main,Footer,Notification,Select,Option,Collapse,CollapseItem`;
-import {Menu,Submenu,MenuItem,MenuItemGroup,Input,InputNumber,Radio,RadioGroup,RadioButton,Switch,Button,ButtonGroup,Tooltip,Form,FormItem,Row,Col,Container,Aside,Header,Main,Footer,Notification,Select,Option,Collapse,CollapseItem } from 'element-ui'
+const elels = `Menu,Submenu,MenuItem,MenuItemGroup,Input,InputNumber,Radio,RadioGroup,RadioButton,Switch,Button,ButtonGroup,Tooltip,Form,FormItem,Row,Col,Container,Aside,Header,Main,Footer,Notification,Select,Option,Collapse,CollapseItem,Alert`;
+import {Menu,Submenu,MenuItem,MenuItemGroup,Input,InputNumber,Radio,RadioGroup,RadioButton,Switch,Button,ButtonGroup,Tooltip,Form,FormItem,Row,Col,Container,Aside,Header,Main,Footer,Notification,Select,Option,Collapse,CollapseItem,Alert } from 'element-ui'
 let ss = ''
 for (let x of elels.split(",")){
     let s = `Vue.use(${x});\n`
@@ -41,6 +41,7 @@ Vue.use(Select);
 Vue.use(Option);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
+Vue.use(Alert);
 Vue.prototype.$notify = Notification;
 
 // Vue.use(ElementUI);

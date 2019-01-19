@@ -15,7 +15,6 @@
         props: ['data','indexData',"i","lazy"],
         data(){
             return{
-                reduces:[]
             }
         },
         watch:{
