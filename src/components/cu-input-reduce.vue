@@ -1,7 +1,7 @@
 <template>
     <div>
         <cuInputReduceInput :lazy="lazy" v-for="(item, index) in disData" :key="index" v-model="disData" :i="index"></cuInputReduceInput>
-        <el-button @click="add">增加一栏</el-button>
+        <el-button @click="add" circle  type="primary" icon="el-icon-plus"></el-button>
         <!--{{disData}}<br><br><br>-->
         <!--{{data}}-->
     </div>
@@ -57,6 +57,7 @@ export default {
             this.initDisdata()
         }
     },
+    //TODO: reduce可删
     methods: {
         initDisdata:function(){
             this.disData = []

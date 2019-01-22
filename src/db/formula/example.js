@@ -131,7 +131,7 @@ let x = {
             "minor": false,
             "format": "${}%",
 
-            // reduce的默认值为数组
+            // reduce的默认值为number
             "default": 0,
             "example": null,
             "choice": null,

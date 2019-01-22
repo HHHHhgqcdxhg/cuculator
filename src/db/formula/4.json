@@ -1,0 +1,332 @@
+{
+    "option": {
+        "id": 4,
+        "name": "kfDamageCalc",
+        "description": "kf伤害计算",
+        "introduce": "kf伤害计算",
+        "lazy": false,
+        "uploader": "",
+        "time": 1547348683,
+        "split": true
+    },
+    "inputs": [
+        {
+            "name": "ATK",
+            "type": "input",
+            "description": "攻击方的atk",
+            "introduce": "攻击方的atk",
+            "placeholder": "攻击方的atk",
+            "max": null,
+            "min": 0,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "example": 0,
+            "value": 100
+        },
+        {
+            "name": "DEF",
+            "type": "input",
+            "description": "被攻击方的def",
+            "introduce": "被攻击方的def",
+            "placeholder": "被攻击方的def",
+            "max": null,
+            "min": null,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "example": 1,
+            "value": 2
+        },
+        {
+            "name": "skill",
+            "type": "input",
+            "description": "技能/%",
+            "introduce": "技能/%",
+            "placeholder": "技能/%",
+            "max": null,
+            "min": 0,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "example": 0,
+            "value": 150
+        },
+        {
+            "name": "ATKbuff",
+            "type": "reduce",
+            "description": "我方攻击buff/%",
+            "introduce": "我方攻击buff/%",
+            "placeholder": "我方攻击buff/%",
+            "max": 150,
+            "min": -50,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "reduce": {
+                "formula": "a + b",
+                "type": "input",
+                "max": null,
+                "min": null,
+                "placeholder": "我方攻击buff/%",
+                "default": 0,
+                "value": [
+                    0
+                ]
+            },
+            "example": 0,
+            "value": 0
+        },
+        {
+            "name": "DEFbuff",
+            "type": "reduce",
+            "description": "敌方防御buff/%",
+            "introduce": "敌方防御buff/%",
+            "placeholder": "敌方防御buff/%",
+            "max": 100,
+            "min": -66.6,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "reduce": {
+                "formula": "a + b",
+                "type": "input",
+                "max": null,
+                "min": null,
+                "placeholder": "敌方防御buff/%",
+                "default": 0,
+                "value": [
+                    0
+                ]
+            },
+            "example": 0,
+            "value": 0
+        },
+        {
+            "name": "oncebuff",
+            "type": "input",
+            "description": "一度buff/%",
+            "introduce": "一度buff/%",
+            "placeholder": "一度buff/%",
+            "max": null,
+            "min": null,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "example": 0,
+            "value": 0
+        },
+        {
+            "name": "ATKElement",
+            "type": "reduce",
+            "description": "我方有利属性buff/%",
+            "introduce": "我方有利属性buff/%",
+            "placeholder": "我方有利属性buff/%",
+            "max": null,
+            "min": null,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "reduce": {
+                "formula": "a + b",
+                "type": "input",
+                "max": null,
+                "min": null,
+                "placeholder": "我方有利属性buff/%",
+                "default": 0,
+                "value": [
+                    0
+                ]
+            },
+            "example": 0,
+            "value": 0
+        },
+        {
+            "name": "DEFElement",
+            "type": "reduce",
+            "description": "敌方属性耐性buff/%",
+            "introduce": "敌方属性耐性buff/%",
+            "placeholder": "敌方属性耐性buff/%",
+            "max": 40,
+            "min": -40,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "reduce": {
+                "formula": "a + b",
+                "type": "input",
+                "max": null,
+                "min": null,
+                "placeholder": "敌方属性耐性buff/%",
+                "default": 0,
+                "value": [
+                    0
+                ]
+            },
+            "example": 0,
+            "value": 0
+        },
+        {
+            "name": "CriticalUp",
+            "type": "input",
+            "description": "暴击伤害buff/%",
+            "introduce": "暴击伤害buff/%",
+            "placeholder": "暴击伤害buff/%",
+            "max": 100,
+            "min": -100,
+            "minor": false,
+            "format": null,
+            "default": 0,
+            "example": 0,
+            "value": 0
+        }
+    ],
+    "switches": [
+        {
+            "name": "element",
+            "type": "buttons",
+            "description": "属性克制",
+            "introduce": "属性克制",
+            "default": 1,
+            "example": 1,
+            "format": null,
+            "data": [
+                {
+                    "text": "克制",
+                    "value": 2
+                },
+                {
+                    "text": "不克制",
+                    "value": 1
+                },
+                {
+                    "text": "被克制",
+                    "value": 0.5
+                }
+            ],
+            "value": 1
+        },
+        {
+            "name": "critical",
+            "type": "switch",
+            "description": "暴击",
+            "introduce": "暴击",
+            "default": 1,
+            "example": 1,
+            "format": null,
+            "data": [
+                {
+                    "text": "是",
+                    "value": 1
+                },
+                {
+                    "text": "否",
+                    "value": 0
+                }
+            ],
+            "value": 1
+        },
+        {
+            "name": "jump",
+            "type": "buttons",
+            "description": "",
+            "introduce": "",
+            "default": 1,
+            "example": 1,
+            "format": null,
+            "data": [
+                {
+                    "text": "1ST",
+                    "value": 1
+                },
+                {
+                    "text": "2ND",
+                    "value": 1.5
+                },
+                {
+                    "text": "3RD",
+                    "value": 2
+                }
+            ],
+            "value": 1
+        }
+    ],
+    "outputs": [
+        {
+            "name": "elementMiddle",
+            "accuracy": null,
+            "fix": null,
+            "show": false,
+            "description": "elementMiddle",
+            "introduce": "elementMiddle",
+            "max": null,
+            "min": null,
+            "formula": "element - DEFElement/100",
+            "split": true,
+            "value": 0
+        },
+        {
+            "name": "elementCoef",
+            "accuracy": null,
+            "fix": null,
+            "show": false,
+            "description": "elementCoef",
+            "introduce": "elementCoef",
+            "max": null,
+            "min": null,
+            "formula": "(element==2.0 && ATKElement ? ATKElement : 0) / 100+ elementMiddle",
+            "split": true,
+            "value": 0
+        },
+        {
+            "name": "damage",
+            "accuracy": 0,
+            "fix": "floor",
+            "show": true,
+            "description": "伤害期望",
+            "introduce": "伤害期望",
+            "max": null,
+            "min": null,
+            "formula": "1.0 / 6.0 * Math.floor(ATK * (1 + ATKbuff/100))/ Math.floor(DEF * (1 + DEFbuff/100))* skill*elementCoef*(oncebuff/100 + 1)* (critical ? 1.5 * (1 + CriticalUp / 100) : 1.0)*jump",
+            "split": true,
+            "value": 0
+        },
+        {
+            "name": "damageRnd",
+            "accuracy": 0,
+            "fix": "floor",
+            "show": false,
+            "description": "伤害2",
+            "introduce": "伤害2",
+            "max": null,
+            "min": null,
+            "formula": "damage*0.075",
+            "split": false,
+            "value": 0
+        },{
+            "name": "damageMin",
+            "accuracy": 0,
+            "fix": "floor",
+            "show": true,
+            "description": "最低伤害",
+            "introduce": "最低伤害",
+            "max": null,
+            "min": null,
+            "formula": "damage - damageRnd",
+            "split": false,
+            "value": 0
+        },{
+            "name": "damageMax",
+            "accuracy": 0,
+            "fix": "floor",
+            "show": true,
+            "description": "最高伤害",
+            "introduce": "最高伤害",
+            "max": null,
+            "min": null,
+            "formula": "damage + damageRnd",
+            "split": false,
+            "value": 0
+        }
+    ]
+}

@@ -113,14 +113,14 @@ export default {
     },
     created() {
         window.APP = this;
-        if (window.screen.width < window.screen.height && window.screen.width < 655) {
-            this.$notify({
-                title: '手机端建议横屏使用哦',
-                message: '',
-                type: 'warning',
-                duration: 0,
-            });
-        }
+        // if (window.screen.width < window.screen.height && window.screen.width < 655) {
+        //     this.$notify({
+        //         title: '手机端建议横屏使用哦',
+        //         message: '',
+        //         type: 'warning',
+        //         duration: 0,
+        //     });
+        // }
 
         axios
             .get('https://cuculator.top/index.json')
@@ -149,7 +149,14 @@ export default {
                 // console.log(this.formulas);
             })
             .catch(error => {
-                this.formulas = window.localStorage.formulas;
+                if(window.localStorage.formulas) {
+                    this.formulas = JSON.parse(window.localStorage.formulas);
+                    this.$notify({
+                        title: '当前处于离线状态,无法获取公式更新',
+                        // message: `version :${oldTime} -> ${newTime}`,
+                        type: 'warning'
+                    });
+                }
             });
     },
     mounted(){

@@ -66,15 +66,18 @@
                         if(newTime !== oldTime){
                             this.data = res.data
                             window.localStorage.setItem(`formula_${this.$route.params.fid}`, JSON.stringify(res.data))
-                            if(hasLocal){
                                 this.$notify({
                                     title: '本公式已更新',
                                     message: `version :${oldTime} -> ${newTime}`,
                                     type: 'success'
                                 });
                             }
-                        }
                     }else{
+                        this.$notify({
+                            title: '从远程获取公式',
+                            message: `version :${res.data.option.time}`,
+                            type: 'success'
+                        });
                         this.data = res.data
                         window.localStorage.setItem(`formula_${this.$route.params.fid}`, JSON.stringify(res.data))
                     }

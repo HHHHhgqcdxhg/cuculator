@@ -14,7 +14,7 @@
             <el-container>
                 <el-main style="padding-top:10px;">
                     <!--{{data}}-->
-                    <el-form label-position="right" label-width="80px">
+                    <el-form label-position="right" label-width="105px">
                         <el-row :gutter="20">
                             <el-col v-for="(o, k) in data.inputs" :key="k" :xs="24" :sm="12" :md="8" :lg="6" :xl="3">
                                 <cuInput :lazy="data.option.lazy" v-model="data.inputs[k]"></cuInput>
@@ -40,7 +40,7 @@
                                 <el-row :gutter="20">
                                     <el-col>
                                         <el-tooltip v-for="(r, i) in data.outputs" :key="i" :disabled="!r.introduce"
-                                                    class="item" effect="light" :content="r.introduce"
+                                                    class="item" effect="light" :content="r.introduce" v-show="r.show"
                                                     placement="top-start">
                                             <el-form-item :label="r.description"> {{ r.value }}</el-form-item>
                                         </el-tooltip>
@@ -89,6 +89,10 @@
         },
 
         created () {
+            //TODO: URL传递计算器参数
+            // eval(`this.f = function(){return 1 + 1}`)
+            this.findParams()
+            this.applyParamsData()
             this.$watch(
                 'data',
                 (newData, oldData) => {
@@ -113,9 +117,34 @@
             this.calculate();
         },
         mouted () {
+
             // this.calculate()
         },
         methods: {
+            findParams(){
+                this.params={}
+                console.log("findParams")
+                try {
+                    let ps = location.href.split('?')[1];
+                    try{
+                        let pa = ps.split("&")
+                        for (let p of pa){
+                            let pp = p.split("=")
+                            this.params[pp[0]] = pp[1]
+                        }
+                        console.log(this.params)
+                    }catch (e) {
+
+                    }
+                }catch(e){}
+                },
+            applyParamsData(){
+                for(let i in this.data.inputs){
+                    // for (let p of this.params){
+                    //     console.log(p)
+                    // }
+                }
+            },
             outputControl(){this.showOutput = !this.showOutput},
             calculate: function () {
                 if (this.data.inputs) {
@@ -186,7 +215,6 @@
         box-shadow: -6px 0 6px -5px #409eff;
         padding-left: 10px;
         min-width: 238px;
-        height: 100vh;
         z-index: 1800;
         background-color: #fff;
     }

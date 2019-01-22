@@ -1,1 +1,2 @@
-window.sw_version = "1.0.6"
+window.sw_version = "1.1.1"
+//TODO: UI优化
