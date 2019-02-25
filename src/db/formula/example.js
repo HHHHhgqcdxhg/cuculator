@@ -434,6 +434,9 @@ let x = {
             // 但是,出于安全考虑,本条表达式只准写一行,不允许出现分号(';'),且必须返回一个number类型的返回值
             "formula": "(1.1 - rand*0.2) * paoji * xiaolv/100 * (1 + shuxingjiacheng/100) * zhuangjiabuzheng/100 * (1 + dengjiyazhi) * (1+danyaobuff/100+zengshangjineng/100)*(1 + direndebuff/100)*(1 + lieshabuff/100)",
 
+            //TODO: format允许传入其他变量
+            "format":"",
+
             // 暂时没用
             "area": 0,
 

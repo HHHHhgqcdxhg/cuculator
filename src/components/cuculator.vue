@@ -116,7 +116,7 @@
             );
             this.calculate();
         },
-        mouted () {
+        mounted () {
 
             // this.calculate()
         },
